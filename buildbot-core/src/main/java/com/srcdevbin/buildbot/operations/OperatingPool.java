@@ -28,8 +28,12 @@ public enum OperatingPool {
 		return executor.getMaximumPoolSize();
 	}
 	
-	public PoolStatus getStatus(){
-		return monitorThread.getStatus();
+	public synchronized PoolStatus getStatus(){
+		synchronized(monitorThread){
+			monitorThread.notify();
+		}
+		PoolStatus status = monitorThread.getStatus();
+		return status;
 	}
 	
 	public void restart(){
@@ -49,17 +53,14 @@ public enum OperatingPool {
 	}
 	
 	public PoolStatus start(int poolSize){
-		if(executor!=null || monitorThread != null){
-			stop();
-		}
-		
 		executor = new PausableThreadPoolExecutor(CORE_POOL_SIZE, poolSize, KEEP_ALIVE_TIME, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(QUEUE_SIZE));
 		executor.prestartAllCoreThreads();
-		monitorThread = new MonitorThread(executor);
-		Thread monThread = new Thread(monitorThread);
-		monThread.setName(String.format("BuildBot-OperatingPool-Monitor-%s", this));
-		monThread.start();
-		return monitorThread.getStatus();
+		
+		// This object is shared between 2 threads
+		// Synchronization is critical when accessing this object
+		monitorThread = createAndStartMonitor(executor);
+		
+		return getStatus();
 	}
 	
 	public void pause(){
@@ -86,8 +87,21 @@ public enum OperatingPool {
 	}
 	
 	private PoolStatus shutdownMonitor(){
-		monitorThread.shutdown();
-		return monitorThread.getStatus();
+		PoolStatus status;
+		synchronized(monitorThread){
+			monitorThread.notify();
+			monitorThread.shutdown();
+			status = monitorThread.getStatus();
+		}
+		return status;
+	}
+	
+	private MonitorThread createAndStartMonitor(PausableThreadPoolExecutor executor){
+		MonitorThread monitor = new MonitorThread(executor);
+		Thread monThread = new Thread(monitor);
+		monThread.setName(String.format("BuildBot-OperatingPool-Monitor-%s", this));
+		monThread.start();
+		return monitor;
 	}
 
 }

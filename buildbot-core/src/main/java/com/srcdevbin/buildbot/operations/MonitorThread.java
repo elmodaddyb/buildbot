@@ -5,22 +5,20 @@ public class MonitorThread implements Runnable{
 	
 	private PausableThreadPoolExecutor executor;
 	private boolean run = true;
-	private int waitSeconds = 5;
-	private PoolStatus status;
 
 	public MonitorThread(PausableThreadPoolExecutor executor){
 		this.executor = executor;
-		status = new PoolStatus();
 	}
 	
 	public void run() {
 		while(run){
-			status = retrieveStatus(executor);
-			try {
-                Thread.sleep(waitSeconds*1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+			synchronized(this){
+				try {
+					this.wait();
+				} catch (InterruptedException e) {
+					run = false;
+				}
+			}
 		}
 	}
 	
@@ -29,7 +27,7 @@ public class MonitorThread implements Runnable{
 	}
 	
 	public PoolStatus getStatus(){
-		return status;
+		return retrieveStatus(executor);
 	}
 	
 	private PoolStatus retrieveStatus(PausableThreadPoolExecutor executor){
