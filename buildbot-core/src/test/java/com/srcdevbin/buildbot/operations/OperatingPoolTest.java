@@ -90,7 +90,7 @@ public class OperatingPoolTest {
 		
 		// Work done on other threads without Future hook
 		// may complete at any time, so wait a bit.
-		Thread.sleep(1000);
+		Thread.sleep(200);
 		
 		// Verify
 		verify(work, times(1)).run();
@@ -154,7 +154,7 @@ public class OperatingPoolTest {
 		
 		// Work done on other threads without Future hook
 		// may complete at any time, so wait a bit.
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 	}
 	
 	@Test
@@ -171,7 +171,7 @@ public class OperatingPoolTest {
 		
 		// Work done on other threads without Future hook
 		// may complete at any time, so wait a bit.
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		
 		verify(work, times(20)).run();
 		assertThat(pool.getStatus().getCompletedTaskCount(), is(20L));
