@@ -1,4 +1,4 @@
-package com.srcdevbin.buildbot_hub;
+package com.srcdevbin.buildbot.hub;
 
 /**
  * Hello world!
