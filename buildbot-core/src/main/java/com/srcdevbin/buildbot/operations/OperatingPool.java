@@ -1,9 +1,15 @@
 package com.srcdevbin.buildbot.operations;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+
+import com.srcdevbin.buildbot.activity.ActivityResult;
 
 public enum OperatingPool {
 	CORE(10);
@@ -73,6 +79,14 @@ public enum OperatingPool {
 	
 	public synchronized void execute(Runnable work){
 		executor.execute(work);
+	}
+	
+	public synchronized List<Future<ActivityResult>> invokeAll(Collection<Callable<ActivityResult>> tasks) throws InterruptedException{
+		return executor.invokeAll(tasks);
+	}
+	
+	public synchronized ActivityResult invokeAny(Collection<Callable<ActivityResult>> tasks) throws InterruptedException, ExecutionException{
+		return executor.invokeAny(tasks);
 	}
 	
 	
