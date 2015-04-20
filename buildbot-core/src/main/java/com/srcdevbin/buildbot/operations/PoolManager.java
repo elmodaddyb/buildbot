@@ -10,11 +10,8 @@ public class PoolManager {
 		List<PoolStatus> poolStatus = new ArrayList<PoolStatus>();
 		
 		for (OperatingPool pool : OperatingPool.values()){
-			pool.stop();
-			pool.getStatus();
+			poolStatus.add(pool.stop());
 		}
-		
-		
 		return poolStatus;
 	}
 
