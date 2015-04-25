@@ -3,20 +3,20 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
-import java.nio.ByteBuffer;
 import java.util.Date;
 import java.util.UUID;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
-public class ActivityDataTest {
+public class InteractionDataTest {
 	
-	private ActivityData activityData;
+	private InteractionData activityData;
 	
 	@Before
 	public void buildUp(){
-		activityData = new ActivityData();
+		activityData = new InteractionData();
 	}
 	
 	@Test
@@ -40,12 +40,12 @@ public class ActivityDataTest {
 	
 	@Test
 	public void getData(){
-		assertThat(activityData.getData(), is(nullValue()));
+		assertThat(activityData.getInteraction(), is(nullValue()));
 		
-		ByteBuffer bbuf = ByteBuffer.allocate(10);
-		activityData.setData(bbuf);
+		Interaction iAction = Mockito.mock(Interaction.class);
+		activityData.setInteraction(iAction);
 		
-		assertThat(activityData.getData(), is(bbuf));
+		assertThat(activityData.getInteraction(), is(iAction));
 	}
 	
 	@Test

@@ -7,29 +7,31 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ActivityResultTest {
+import com.srcdevbin.buildbot.operations.OperationStatus;
+
+public class InteractionResultTest {
 	
-	private ActivityResult activityResult;
+	private InteractionResult activityResult;
 	
 	@Before
 	public void buildUp(){
-		activityResult = new ActivityResult();
+		activityResult = new InteractionResult();
 	}
 	
 	@Test
 	public void getStatus(){
 		assertThat(activityResult.getStatus(), is(nullValue()));
 		
-		activityResult.setStatus(ActivityStatus.COMPLETE);
+		activityResult.setStatus(OperationStatus.COMPLETE);
 		
-		assertThat(activityResult.getStatus(), is(ActivityStatus.COMPLETE));
+		assertThat(activityResult.getStatus(), is(OperationStatus.COMPLETE));
 	}
 	
 	@Test
 	public void getActivityData(){
 		assertThat(activityResult.getActivityData(), is(nullValue()));
 		
-		ActivityData activityData = new ActivityData();
+		InteractionData activityData = new InteractionData();
 		activityResult.setActivityData(activityData);
 		
 		assertThat(activityResult.getActivityData(), is(activityData));

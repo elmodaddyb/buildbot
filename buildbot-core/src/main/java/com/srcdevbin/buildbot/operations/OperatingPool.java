@@ -9,8 +9,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import com.srcdevbin.buildbot.activity.ActivityResult;
-
 public enum OperatingPool {
 	CORE(10);
 	
@@ -81,11 +79,11 @@ public enum OperatingPool {
 		executor.execute(work);
 	}
 	
-	public synchronized List<Future<ActivityResult>> invokeAll(Collection<Callable<ActivityResult>> tasks) throws InterruptedException{
+	public synchronized List<Future<OperationResult>> invokeAll(Collection<Callable<OperationResult>> tasks) throws InterruptedException{
 		return executor.invokeAll(tasks);
 	}
 	
-	public synchronized ActivityResult invokeAny(Collection<Callable<ActivityResult>> tasks) throws InterruptedException, ExecutionException{
+	public synchronized OperationResult invokeAny(Collection<Callable<OperationResult>> tasks) throws InterruptedException, ExecutionException{
 		return executor.invokeAny(tasks);
 	}
 	

@@ -1,16 +1,15 @@
 package com.srcdevbin.buildbot.activity;
 
 import java.io.Serializable;
-import java.nio.ByteBuffer;
 import java.util.Date;
 import java.util.UUID;
 
-public class ActivityData implements Serializable{
+public class InteractionData implements Serializable{
 
 	private static final long serialVersionUID = 2441602585628822931L;
 	private String name;
 	private Date executionTime;
-	private ByteBuffer data;
+	private Interaction iAction;
 	private UUID uniqueId;
 	
 	public String getName() {
@@ -29,12 +28,12 @@ public class ActivityData implements Serializable{
 		this.executionTime = executionTime;
 	}
 
-	public ByteBuffer getData() {
-		return data;
+	public Interaction getInteraction() {
+		return iAction;
 	}
 
-	public void setData(ByteBuffer data) {
-		this.data = data;
+	public void setInteraction(Interaction iAction) {
+		this.iAction = iAction;
 	}
 
 	public UUID getUniqueId() {

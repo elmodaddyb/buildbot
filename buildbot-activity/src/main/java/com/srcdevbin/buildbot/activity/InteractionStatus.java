@@ -1,6 +1,6 @@
 package com.srcdevbin.buildbot.activity;
 
-public enum ActivityStatus {
+public enum InteractionStatus {
 	COMPLETE, 
 	COMPLETE_WITH_PENDING, 
 	FAILED, 
