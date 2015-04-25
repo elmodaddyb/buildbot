@@ -5,7 +5,12 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class PoolManager {
+	
+	private Logger logger = LoggerFactory.getLogger(PoolManager.class);
 
 	public List<PoolStatus> stopAll() {
 		List<PoolStatus> poolStatus = new ArrayList<PoolStatus>();
@@ -22,10 +27,27 @@ public class PoolManager {
 		List<Future<OperationResult>> results;
 		try {
 			OperatingPool pool = getPool(iAction.getType());
+			System.out.println("start --> " + System.currentTimeMillis());
+			results = pool.invokeAll(tasks);
+			System.out.println("end   --> " + System.currentTimeMillis());
+		} catch (InterruptedException e) {
+			results = null;
+		}
+		return results;
+	}
+
+	public List<Future<OperationResult>> submitAll(List<Operation> actions, OperationType type) {
+		List<Future<OperationResult>> results;
+		List<Callable<OperationResult>> tasks = new ArrayList<Callable<OperationResult>>();
+		tasks.addAll(actions);
+		try {
+			logger.trace("Invoke {} operations of type {}", actions.size(), type);
+			OperatingPool pool = getPool(type);
 			results = pool.invokeAll(tasks);
 		} catch (InterruptedException e) {
 			results = null;
 		}
+		logger.trace("Return results {}", results.size());
 		return results;
 	}
 

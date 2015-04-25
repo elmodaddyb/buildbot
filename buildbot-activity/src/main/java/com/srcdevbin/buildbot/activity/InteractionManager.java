@@ -26,6 +26,7 @@ public class InteractionManager {
 		List<Future<OperationResult>> results =  poolManager.submit(iAction);
 		Future<OperationResult> pendingTask = results.get(0);
 
+		
 		try {
 			result = (InteractionResult) pendingTask.get();
 		} catch (InterruptedException e) {
@@ -35,6 +36,8 @@ public class InteractionManager {
 			logger.error("ExecutionException : {}", e);
 			throw new InteractionException(e);
 		}
+		
+		
 		return result;
 	}
 

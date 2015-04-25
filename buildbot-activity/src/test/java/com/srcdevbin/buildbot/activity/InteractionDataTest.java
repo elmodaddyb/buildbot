@@ -1,4 +1,5 @@
 package com.srcdevbin.buildbot.activity;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -6,55 +7,65 @@ import static org.junit.Assert.assertThat;
 import java.util.Date;
 import java.util.UUID;
 
+import org.apache.commons.lang3.SerializationUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 public class InteractionDataTest {
 	
-	private InteractionData activityData;
+	private InteractionData iData;
 	
 	@Before
 	public void buildUp(){
-		activityData = new InteractionData();
+		iData = new InteractionData();
 	}
 	
 	@Test
 	public void getName(){
-		assertThat(activityData.getName(), is(nullValue()));
+		assertThat(iData.getName(), is(nullValue()));
 		
-		activityData.setName("Name");
+		iData.setName("Name");
 		
-		assertThat(activityData.getName(), is("Name"));
+		assertThat(iData.getName(), is("Name"));
 	}
 	
 	@Test
 	public void getExecutionTime(){
-		assertThat(activityData.getExecutionTime(), is(nullValue()));
+		assertThat(iData.getExecutionTime(), is(nullValue()));
 		
 		Date date = new Date();
-		activityData.setExecutionTime(date);
+		iData.setExecutionTime(date);
 		
-		assertThat(activityData.getExecutionTime(), is(date));
+		assertThat(iData.getExecutionTime(), is(date));
 	}
 	
 	@Test
 	public void getData(){
-		assertThat(activityData.getInteraction(), is(nullValue()));
+		assertThat(iData.getInteraction(), is(nullValue()));
 		
 		Interaction iAction = Mockito.mock(Interaction.class);
-		activityData.setInteraction(iAction);
+		iData.setInteraction(iAction);
 		
-		assertThat(activityData.getInteraction(), is(iAction));
+		assertThat(iData.getInteraction(), is(iAction));
 	}
 	
 	@Test
 	public void getUniqueId(){
-		assertThat(activityData.getUniqueId(), is(nullValue()));
+		assertThat(iData.getUniqueId(), is(nullValue()));
 		
 		UUID uuid = UUID.randomUUID();
-		activityData.setUniqueId(uuid);
+		iData.setUniqueId(uuid);
 		
-		assertThat(activityData.getUniqueId(), is(uuid));
+		assertThat(iData.getUniqueId(), is(uuid));
 	}
+	
+	@Test
+	public void isSerializable(){
+		byte[] objectData = SerializationUtils.serialize(iData);
+		InteractionData deserialized = (InteractionData)SerializationUtils.deserialize(objectData);
+		
+		assertThat(deserialized, instanceOf(InteractionData.class));
+	}
+
 }
