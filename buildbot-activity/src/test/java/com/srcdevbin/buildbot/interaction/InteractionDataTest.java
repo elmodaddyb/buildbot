@@ -1,4 +1,4 @@
-package com.srcdevbin.buildbot.activity;
+package com.srcdevbin.buildbot.interaction;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -11,6 +11,9 @@ import org.apache.commons.lang3.SerializationUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+
+import com.srcdevbin.buildbot.interaction.Interaction;
+import com.srcdevbin.buildbot.interaction.InteractionData;
 
 public class InteractionDataTest {
 	

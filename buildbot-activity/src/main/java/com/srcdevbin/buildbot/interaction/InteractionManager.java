@@ -1,4 +1,4 @@
-package com.srcdevbin.buildbot.activity;
+package com.srcdevbin.buildbot.interaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,6 @@ public class InteractionManager {
 		List<Future<OperationResult>> results =  poolManager.submit(iAction);
 		Future<OperationResult> pendingTask = results.get(0);
 
-		
 		try {
 			result = (InteractionResult) pendingTask.get();  // NIO wait....
 		} catch (InterruptedException e) {
@@ -50,18 +49,18 @@ public class InteractionManager {
 		InteractionResult firstResult;
 		InteractionResult result;
 		
+		// Run the first action
 		firstResult = run(iAction);
 		results.add(firstResult);
 		nextTask = firstResult.getOperationData();
 		
+		// Iterate until all tasks are complete.
 		if(nextTask != null){
-			// Iterate until all tasks are complete.
 			while(nextTask != null){
 				result = run(nextTask.getOperation());
 				results.add(result);
 				nextTask = result.getOperationData();
 			}
-			
 		}
 		return results;
 	}

@@ -1,17 +1,26 @@
-package com.srcdevbin.buildbot.activity;
+package com.srcdevbin.buildbot.interaction;
 
-import java.io.Serializable;
-
+import com.srcdevbin.buildbot.interaction.Interaction;
+import com.srcdevbin.buildbot.interaction.InteractionResult;
 import com.srcdevbin.buildbot.operations.OperationData;
 import com.srcdevbin.buildbot.operations.OperationResult;
 import com.srcdevbin.buildbot.operations.OperationStatus;
 import com.srcdevbin.buildbot.operations.OperationType;
 
-public class HelloWorldInteraction implements Serializable, Interaction{
-	private static final long serialVersionUID = 4296097846812602884L;
+public class SlowInteraction implements Interaction {
+
+	private long delay;
 	
+	public SlowInteraction() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public void setDelay(long delay) {
+		this.delay = delay;
+	}
+
 	public OperationResult call() throws Exception {
-		System.out.println("Hello World");
+		Thread.sleep(delay);
 		OperationResult result = new InteractionResult();
 		result.setStatus(OperationStatus.COMPLETE);
 		return result;
@@ -27,4 +36,5 @@ public class HelloWorldInteraction implements Serializable, Interaction{
 		return null;
 	}
 	
+
 }

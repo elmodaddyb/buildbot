@@ -1,4 +1,4 @@
-package com.srcdevbin.buildbot.activity;
+package com.srcdevbin.buildbot.interaction;
 
 public class InteractionException extends Exception {
 
