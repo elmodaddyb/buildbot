@@ -1,19 +1,20 @@
 package com.srcdevbin.buildbot.activity;
 
+import com.srcdevbin.buildbot.operations.OperationData;
 import com.srcdevbin.buildbot.operations.OperationResult;
 import com.srcdevbin.buildbot.operations.OperationStatus;
 
 public class InteractionResult implements OperationResult {
 	
 	private OperationStatus status;
-	private InteractionData interactionData;
+	private OperationData operationData;
 
-	public InteractionData getActivityData() {
-		return interactionData;
+	public OperationData getOperationData() {
+		return operationData;
 	}
 
-	public void setActivityData(InteractionData interactionData) {
-		this.interactionData = interactionData;
+	public void setOperationData(OperationData operationData) {
+		this.operationData = operationData;
 	}
 
 	public OperationStatus getStatus() {

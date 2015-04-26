@@ -2,13 +2,21 @@ package com.srcdevbin.buildbot.activity;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import com.srcdevbin.buildbot.operations.OperatingPool;
+import com.srcdevbin.buildbot.operations.Operation;
+import com.srcdevbin.buildbot.operations.OperationData;
+import com.srcdevbin.buildbot.operations.OperationResult;
 import com.srcdevbin.buildbot.operations.OperationStatus;
+import com.srcdevbin.buildbot.operations.OperationType;
 
 public class InteractionManagerTest {
 	
@@ -48,6 +56,36 @@ public class InteractionManagerTest {
 		assertThat(result, notNullValue());
 		assertThat(result.getStatus(), is(OperationStatus.COMPLETE));
 		assertThat(elapsed >= expDelay, is(true));
+	}
+	
+	@Test
+	public void runUntilDone() throws Exception{
+		// Mock
+		Interaction iAction = Mockito.mock(Interaction.class);
+		OperationResult result = Mockito.mock(InteractionResult.class);
+		OperationData operationData = Mockito.mock(OperationData.class);
+		Operation operation = Mockito.mock(Operation.class);
+		OperationResult nextResult = Mockito.mock(InteractionResult.class);
+		
+		// Mock Interaction
+		when(iAction.call()).thenReturn(result);
+		when(iAction.getType()).thenReturn(OperationType.NOOP);
+		
+		// Mock Result
+		when(result.getOperationData()).thenReturn(operationData);
+		
+		// Mock OperationData
+		when(operationData.getOperation()).thenReturn(operation);
+		when(operation.call()).thenReturn(nextResult);
+		when(operation.getType()).thenReturn(OperationType.NOOP);
+		when(nextResult.getOperationData()).thenReturn(null);
+		
+		// Test
+		List<InteractionResult> results = manager.runUntilDone(iAction);
+		
+		
+		// Verify
+		assertThat(results.size(), is(2));		
 	}
 
 }

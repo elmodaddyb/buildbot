@@ -5,5 +5,7 @@ import java.util.concurrent.Callable;
 public interface Operation extends Callable<OperationResult> {
 	
 	OperationType getType();
+	
+	OperationData getData();
 
 }

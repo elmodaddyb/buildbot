@@ -4,12 +4,15 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
-public class InteractionData implements Serializable{
+import com.srcdevbin.buildbot.operations.Operation;
+import com.srcdevbin.buildbot.operations.OperationData;
+
+public class InteractionData implements Serializable, OperationData{
 
 	private static final long serialVersionUID = 2441602585628822931L;
 	private String name;
 	private Date executionTime;
-	private Interaction iAction;
+	private Operation iAction;
 	private UUID uniqueId;
 	
 	public String getName() {
@@ -28,11 +31,11 @@ public class InteractionData implements Serializable{
 		this.executionTime = executionTime;
 	}
 
-	public Interaction getInteraction() {
+	public Operation getOperation() {
 		return iAction;
 	}
 
-	public void setInteraction(Interaction iAction) {
+	public void setOperation(Operation iAction) {
 		this.iAction = iAction;
 	}
 

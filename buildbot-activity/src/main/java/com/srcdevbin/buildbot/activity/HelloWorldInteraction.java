@@ -2,6 +2,7 @@ package com.srcdevbin.buildbot.activity;
 
 import java.io.Serializable;
 
+import com.srcdevbin.buildbot.operations.OperationData;
 import com.srcdevbin.buildbot.operations.OperationResult;
 import com.srcdevbin.buildbot.operations.OperationStatus;
 import com.srcdevbin.buildbot.operations.OperationType;
@@ -18,6 +19,12 @@ public class HelloWorldInteraction implements Serializable, Interaction{
 	
 	public OperationType getType(){
 		return OperationType.CORE;
+	}
+
+	@Override
+	public OperationData getData() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

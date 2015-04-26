@@ -42,12 +42,12 @@ public class InteractionDataTest {
 	
 	@Test
 	public void getData(){
-		assertThat(iData.getInteraction(), is(nullValue()));
+		assertThat(iData.getOperation(), is(nullValue()));
 		
 		Interaction iAction = Mockito.mock(Interaction.class);
-		iData.setInteraction(iAction);
+		iData.setOperation(iAction);
 		
-		assertThat(iData.getInteraction(), is(iAction));
+		assertThat(iData.getOperation(), is(iAction));
 	}
 	
 	@Test

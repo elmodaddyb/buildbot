@@ -29,12 +29,12 @@ public class InteractionResultTest {
 	
 	@Test
 	public void getActivityData(){
-		assertThat(activityResult.getActivityData(), is(nullValue()));
+		assertThat(activityResult.getOperationData(), is(nullValue()));
 		
 		InteractionData activityData = new InteractionData();
-		activityResult.setActivityData(activityData);
+		activityResult.setOperationData(activityData);
 		
-		assertThat(activityResult.getActivityData(), is(activityData));
+		assertThat(activityResult.getOperationData(), is(activityData));
 	}
 
 }

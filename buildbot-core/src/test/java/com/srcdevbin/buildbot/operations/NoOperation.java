@@ -12,4 +12,10 @@ public class NoOperation implements Operation {
 		return OperationType.NOOP;
 	}
 
+	@Override
+	public OperationData getData() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

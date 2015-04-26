@@ -1,8 +1,7 @@
 package com.srcdevbin.buildbot.operations;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
@@ -50,7 +49,8 @@ public class PoolManagerTest {
 		
 		assertThat(results.size(), is(1));
 		OperationResult result = (OperationResult)results.get(0).get();
-		assertThat(result, nullValue());
+		assertThat(result, notNullValue());
+		assertThat(result, instanceOf(NoOperationResult.class));
 	}
 	
 	@Test

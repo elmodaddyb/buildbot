@@ -12,4 +12,16 @@ public class NoOperationResult implements OperationResult {
 		// no op
 	}
 
+	@Override
+	public OperationData getOperationData() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOperationData(OperationData operationData) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
