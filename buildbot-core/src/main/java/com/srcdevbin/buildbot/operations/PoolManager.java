@@ -27,10 +27,10 @@ public class PoolManager {
 		List<Future<OperationResult>> results;
 		try {
 			OperatingPool pool = getPool(iAction.getType());
-			System.out.println("start --> " + System.currentTimeMillis());
+			logger.trace("Invoke All tasks: {} with {} pool", tasks.size(), pool);
 			results = pool.invokeAll(tasks);
-			System.out.println("end   --> " + System.currentTimeMillis());
 		} catch (InterruptedException e) {
+			logger.error("Interruped Exception occurred", e);
 			results = null;
 		}
 		return results;

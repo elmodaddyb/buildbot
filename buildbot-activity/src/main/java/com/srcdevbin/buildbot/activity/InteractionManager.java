@@ -31,7 +31,7 @@ public class InteractionManager {
 
 		
 		try {
-			result = (InteractionResult) pendingTask.get();
+			result = (InteractionResult) pendingTask.get();  // NIO wait....
 		} catch (InterruptedException e) {
 			logger.error("InterruptedException : {}", e);
 			throw new InteractionException(e);
