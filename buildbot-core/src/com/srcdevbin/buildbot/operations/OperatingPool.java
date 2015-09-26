@@ -7,6 +7,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public enum OperatingPool {
@@ -75,7 +76,7 @@ public enum OperatingPool {
 		executor.resume();
 	}
 	
-	public synchronized void execute(Runnable work){
+	public synchronized void execute(Runnable work) throws RejectedExecutionException{
 		executor.execute(work);
 	}
 	

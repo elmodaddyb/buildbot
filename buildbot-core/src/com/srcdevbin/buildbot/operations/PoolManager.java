@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
+import java.util.concurrent.RejectedExecutionException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,6 +50,16 @@ public class PoolManager {
 		}
 		logger.trace("Return results {}", results.size());
 		return results;
+	}
+	
+	public void submit(Execution activity) {
+		OperatingPool pool = getPool(activity.getType());
+		try {
+			logger.trace("Execution Activity: {} with {} pool", activity, pool);
+			pool.execute(activity);
+		} catch (RejectedExecutionException e) {
+			logger.error("Activity {} has been rejected from pool {}",activity, pool, e);
+		}
 	}
 
 	private OperatingPool getPool(OperationType type) {
