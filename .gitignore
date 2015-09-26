@@ -1,3 +1,6 @@
 /.metadata/
 .DS_Store
 /RemoteSystemsTempFiles/
+.gradle
+gradlew
+gradle/
