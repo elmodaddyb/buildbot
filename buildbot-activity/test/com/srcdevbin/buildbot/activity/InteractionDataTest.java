@@ -12,6 +12,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import com.srcdevbin.buildbot.interaction.Interaction;
+import com.srcdevbin.buildbot.interaction.InteractionData;
+
 public class InteractionDataTest {
 	
 	private InteractionData iData;

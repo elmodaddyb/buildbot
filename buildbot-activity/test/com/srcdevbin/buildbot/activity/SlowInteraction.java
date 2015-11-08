@@ -1,5 +1,7 @@
 package com.srcdevbin.buildbot.activity;
 
+import com.srcdevbin.buildbot.interaction.Interaction;
+import com.srcdevbin.buildbot.interaction.InteractionResult;
 import com.srcdevbin.buildbot.operations.OperationData;
 import com.srcdevbin.buildbot.operations.OperationResult;
 import com.srcdevbin.buildbot.operations.OperationStatus;

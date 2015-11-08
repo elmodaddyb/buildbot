@@ -11,6 +11,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import com.srcdevbin.buildbot.interaction.HelloWorldInteraction;
+import com.srcdevbin.buildbot.interaction.Interaction;
+import com.srcdevbin.buildbot.interaction.InteractionException;
+import com.srcdevbin.buildbot.interaction.InteractionManager;
+import com.srcdevbin.buildbot.interaction.InteractionResult;
 import com.srcdevbin.buildbot.operations.OperatingPool;
 import com.srcdevbin.buildbot.operations.Operation;
 import com.srcdevbin.buildbot.operations.OperationData;
