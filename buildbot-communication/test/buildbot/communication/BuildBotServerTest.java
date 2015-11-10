@@ -1,16 +1,29 @@
 package buildbot.communication;
 
+import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 
 public class BuildBotServerTest {
 	
-	private BuildBotServer server;
+	private BuildBotListener server;
 	private int portNumber;
 	
 	@Before
-	public void buildUp(){
+	public void buildUp() throws CommunicationException{
 		portNumber = 9191;
-		server = new BuildBotServer(portNumber);
+		server = new BuildBotListener(portNumber);
+		server.start();
+	}
+	
+	@After
+	public void tearDown(){
+		server.stop();
+	}
+	
+	@Test
+	public void noop(){
+		
 	}
 	
 	
