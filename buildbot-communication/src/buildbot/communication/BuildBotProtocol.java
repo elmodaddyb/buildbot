@@ -10,7 +10,13 @@ import buildbot.communication.message.BuildBotRequest;
 import buildbot.communication.message.ExceptionRequest;
 
 public class BuildBotProtocol {
+	
+	private CommunicationManager communicationManager;
 
+	public BuildBotProtocol(){
+		communicationManager = new CommunicationManager();
+	}
+	
 	public void process(Socket socket) {
 		BuildBotRequest request;
 		BuildBotReply reply;
@@ -22,10 +28,13 @@ public class BuildBotProtocol {
 	            ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
 				
 	        ) {
+				// Get the request
 	            request = (BuildBotRequest)in.readObject();
 	            
-	            reply  = CommunicationManager.process(request);
+	            // Process the request
+	            reply  = communicationManager.process(request);
 	            
+	            // respond with the reply
 	            out.writeObject(reply);
 	            
 	        } catch (IOException e) {
@@ -34,7 +43,7 @@ public class BuildBotProtocol {
 	        	request = new ExceptionRequest(e);
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+	        }
 	}
 		
 }
