@@ -15,6 +15,11 @@ public class BuildBotCommunicator {
 	private int port;
 	private String host;
 
+	public BuildBotCommunicator(String host, int port){
+		this.host = host;
+		this.port = port;
+	}
+	
 	public BuildBotReply communicate(BuildBotRequest request) throws Exception{
 		BuildBotReply reply;
 		try (

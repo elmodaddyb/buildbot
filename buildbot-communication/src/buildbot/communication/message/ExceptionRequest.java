@@ -8,4 +8,9 @@ public class ExceptionRequest implements BuildBotRequest {
 
 	private static final long serialVersionUID = -6329835817920062902L;
 
+	@Override
+	public RequestType getType() {
+		return RequestType.ACTIVITY;
+	}
+
 }

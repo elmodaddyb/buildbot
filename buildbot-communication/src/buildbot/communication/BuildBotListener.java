@@ -18,6 +18,7 @@ public class BuildBotListener {
 	public void start() throws CommunicationException {
 		try {
 			listener = new ServerSocket(port);
+			System.out.println("Listener started on port: " + this.port);
 			while (true) {
 				Socket socket = listener.accept();
 				try {
@@ -30,6 +31,7 @@ public class BuildBotListener {
 		} catch (IOException e) {
 			throw new CommunicationException(e);
 		} finally {
+			System.out.println("Listener stopped on port: " + this.port);
 			try {
 				listener.close();
 			} catch (IOException e) {
@@ -42,6 +44,15 @@ public class BuildBotListener {
 	public ListenerStatus stop(){
 		IOUtils.closeQuietly(listener);
 		return ListenerStatus.STOPPED;
+	}
+	
+	public static void main(String args[]){
+		try {
+			new BuildBotListener(55055).start();
+		} catch (CommunicationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
