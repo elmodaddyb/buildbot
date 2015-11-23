@@ -5,6 +5,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import java.util.Date;
 import java.util.UUID;
 
+import org.apache.commons.lang3.SerializationUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +35,7 @@ public class BuildBotCommunicatorTest {
 		
 		BuildBotRequest request = new ActivityRequest();
 		
-		((ActivityRequest)request).setActivityData(data);
+		request.setData(SerializationUtils.serialize(data));
 		
 		BuildBotReply reply = communicator.communicate(request);
 		Assert.assertThat(reply, notNullValue());

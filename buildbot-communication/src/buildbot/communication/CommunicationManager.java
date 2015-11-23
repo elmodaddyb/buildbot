@@ -1,5 +1,7 @@
 package buildbot.communication;
 
+import org.apache.commons.lang3.SerializationUtils;
+
 import com.srcdevbin.buildbot.activity.ActivityData;
 
 import buildbot.communication.message.ActivityReply;
@@ -19,16 +21,16 @@ public class CommunicationManager {
 		BuildBotReply reply;
 		switch(request.getType()){
 		case ACTIVITY:
-			ActivityData data = ((ActivityRequest)request).getActivityData();
+			ActivityData activtyData = (ActivityData)SerializationUtils.deserialize(request.getData());
 			reply = new ActivityReply();
-			((ActivityReply)reply).setStatus(ReplyStatus.COMPLETE_SUCCESS);
+			reply.setStatus(ReplyStatus.COMPLETE_SUCCESS);
 			break;
 		case INTERACTION:
 			reply = null;
 			break;
 		default:
 			reply = new ExceptionReply(new RuntimeException("Request Type Not Found"));
-			((ExceptionReply)reply).setStatus(ReplyStatus.COMPLETE_FAILURE);
+			reply.setStatus(ReplyStatus.COMPLETE_FAILURE);
 		}
 		
 		return reply;

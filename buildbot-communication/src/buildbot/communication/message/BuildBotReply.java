@@ -4,6 +4,12 @@ import java.io.Serializable;
 
 public interface BuildBotReply extends Serializable {
 	
-	ReplyStatus getStatus(); 
+	ReplyStatus getStatus();
+	
+	void setStatus(ReplyStatus status);
+	
+	byte[] getData();
+	
+	void setData(byte[] data);
 
 }

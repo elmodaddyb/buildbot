@@ -13,4 +13,16 @@ public class ExceptionRequest implements BuildBotRequest {
 		return RequestType.ACTIVITY;
 	}
 
+	@Override
+	public byte[] getData() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setData(byte[] data) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
