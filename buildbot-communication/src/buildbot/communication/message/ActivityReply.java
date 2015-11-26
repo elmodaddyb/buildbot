@@ -1,7 +1,7 @@
 package buildbot.communication.message;
 
 public class ActivityReply implements BuildBotReply {
-	private ReplyStatus status;
+	protected ReplyStatus status;
 	private byte[] data;
 	
 	private static final long serialVersionUID = 7594186807121808683L;

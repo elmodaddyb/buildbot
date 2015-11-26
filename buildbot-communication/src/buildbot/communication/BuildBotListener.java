@@ -6,13 +6,19 @@ import java.net.Socket;
 
 import org.apache.commons.io.IOUtils;
 
+import com.srcdevbin.buildbot.operations.OperatingPool;
+
 public class BuildBotListener {
 	
 	private ServerSocket listener;
 	private int port;
+	private int restartCount;
+	private int RESTART_LIMIT;
 	
 	public BuildBotListener(int port){
 		this.port = port;
+		this.restartCount = 0;
+		this.RESTART_LIMIT = 5;
 	}
 	
 	public void start() throws CommunicationException {
@@ -29,7 +35,8 @@ public class BuildBotListener {
 				}
 			}
 		} catch (IOException e) {
-			throw new CommunicationException(e);
+			IOUtils.closeQuietly(listener);
+			restart();
 		} finally {
 			System.out.println("Listener stopped on port: " + this.port);
 			try {
@@ -41,6 +48,18 @@ public class BuildBotListener {
 
 	}
 	
+	private void restart(){
+		if(restartCount <= RESTART_LIMIT){
+			try {
+				restartCount++;
+				start();
+			} catch (CommunicationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public ListenerStatus stop(){
 		IOUtils.closeQuietly(listener);
 		return ListenerStatus.STOPPED;
@@ -48,6 +67,7 @@ public class BuildBotListener {
 	
 	public static void main(String args[]){
 		try {
+			OperatingPool.CORE.start();
 			new BuildBotListener(55055).start();
 		} catch (CommunicationException e) {
 			// TODO Auto-generated catch block

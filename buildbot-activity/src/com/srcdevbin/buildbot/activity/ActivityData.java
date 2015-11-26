@@ -4,15 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
-import com.srcdevbin.buildbot.operations.Execution;
-import com.srcdevbin.buildbot.operations.ExecutionData;
-
-public class ActivityData implements Serializable, ExecutionData{
+public class ActivityData implements Serializable{
 
 	private static final long serialVersionUID = 2441602585628822931L;
 	private String name;
 	private Date executionTime;
-	private Execution activity;
+	private ActivityDetail detail;
 	private UUID uniqueId;
 	
 	public String getName() {
@@ -31,14 +28,6 @@ public class ActivityData implements Serializable, ExecutionData{
 		this.executionTime = executionTime;
 	}
 
-	public Execution getExecution() {
-		return activity;
-	}
-
-	public void setExecution(Execution activity) {
-		this.activity = activity;
-	}
-
 	public UUID getUniqueId() {
 		return uniqueId;
 	}
@@ -46,5 +35,15 @@ public class ActivityData implements Serializable, ExecutionData{
 	public void setUniqueId(UUID uniqueId) {
 		this.uniqueId = uniqueId;
 	}
+	
+	public ActivityDetail getDetail(){
+		return detail;
+	}
+	
+	public void setDetail(ActivityDetail detail){
+		this.detail = detail;
+	}
+	
+	
 
 }

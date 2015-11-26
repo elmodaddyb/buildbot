@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.srcdevbin.buildbot.activity.ActivityData;
+import com.srcdevbin.buildbot.activity.ActivityDetail;
 
 import buildbot.communication.message.ActivityRequest;
 import buildbot.communication.message.BuildBotReply;
@@ -30,8 +31,11 @@ public class BuildBotCommunicatorTest {
 	public void communicateRemote() throws Exception{
 		ActivityData data = new ActivityData();
 		data.setExecutionTime(new Date());
-		data.setName("TEST ACTIVITY");
+		data.setName("HELLO");
 		data.setUniqueId(UUID.randomUUID());
+		ActivityDetail detail = new ActivityDetail();
+		detail.setDetail("Hello Test".getBytes());
+		data.setDetail(detail);
 		
 		BuildBotRequest request = new ActivityRequest();
 		

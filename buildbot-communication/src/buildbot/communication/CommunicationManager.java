@@ -4,8 +4,6 @@ import org.apache.commons.lang3.SerializationUtils;
 
 import com.srcdevbin.buildbot.activity.ActivityData;
 
-import buildbot.communication.message.ActivityReply;
-import buildbot.communication.message.ActivityRequest;
 import buildbot.communication.message.BuildBotReply;
 import buildbot.communication.message.BuildBotRequest;
 import buildbot.communication.message.ExceptionReply;
@@ -22,7 +20,7 @@ public class CommunicationManager {
 		switch(request.getType()){
 		case ACTIVITY:
 			ActivityData activtyData = (ActivityData)SerializationUtils.deserialize(request.getData());
-			reply = new ActivityReply();
+			reply = new ActivityTranslator().process(activtyData);
 			reply.setStatus(ReplyStatus.COMPLETE_SUCCESS);
 			break;
 		case INTERACTION:
