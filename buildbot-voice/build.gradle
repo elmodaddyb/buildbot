@@ -1,14 +1,14 @@
 apply plugin: 'java'
+apply plugin: 'ivy-publish'
 apply plugin: 'eclipse'
 
 group = 'com.srcdevbin'
 version = '0.0.1'
 
-description = """buildbot-activity"""
+description = """"""
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-version = '0.0.1'
 
 sourceSets {
     main {
@@ -31,6 +31,9 @@ repositories {
     ivy {
         url "${System.properties['user.home']}/.ivy2/local"
     }
+    flatDir {
+       dirs 'lib'
+    }
 }
 
 uploadArchives {
@@ -42,14 +45,20 @@ uploadArchives {
 }
 
 dependencies {
+    compile group: 'junit', name: 'junit', version:'4.12'
     compile group: 'org.mockito', name: 'mockito-core', version:'2.0.6-beta'
     compile group: 'org.slf4j', name: 'slf4j-api', version:'1.7.12'
     compile group: 'ch.qos.logback', name: 'logback-classic', version:'1.1.3'
     compile group: 'ch.qos.logback', name: 'logback-core', version:'1.1.3'
     compile group: 'org.apache.commons', name: 'commons-lang3', version:'3.4'
-    compile group: 'com.srcdevbin', name: 'buildbot-core', version:'0.0.1'
-    compile group: 'com.srcdevbin', name: 'buildbot-voice', version: '0.0.1'
-    testCompile group: 'junit', name: 'junit', version:'4.12'
+    compile name: 'jsapi'
+    compile name: 'freetts'
+    compile name: 'cmu_time_awb'
+    compile name: 'cmudict04'
+    compile name: 'cmulex'
+    compile name: 'cmutimelex'
+    compile name: 'en_us'
+    compile name: 'freetts-jsapi10'
 }
 
 eclipse.project {
