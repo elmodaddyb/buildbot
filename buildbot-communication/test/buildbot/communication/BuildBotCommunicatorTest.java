@@ -44,5 +44,23 @@ public class BuildBotCommunicatorTest {
 		BuildBotReply reply = communicator.communicate(request);
 		Assert.assertThat(reply, notNullValue());
 	}
+	
+	@Test
+	public void communicateGreeting() throws Exception{
+		ActivityData data = new ActivityData();
+		data.setExecutionTime(new Date());
+		data.setName("GREETING");
+		data.setUniqueId(UUID.randomUUID());
+		ActivityDetail detail = new ActivityDetail();
+		detail.setDetail("Hello There".getBytes());
+		data.setDetail(detail);
+		
+		BuildBotRequest request = new ActivityRequest();
+		
+		request.setData(SerializationUtils.serialize(data));
+		
+		BuildBotReply reply = communicator.communicate(request);
+		Assert.assertThat(reply, notNullValue());
+	}
 
 }

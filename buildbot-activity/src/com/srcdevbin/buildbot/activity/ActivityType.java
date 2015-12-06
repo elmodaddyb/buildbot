@@ -4,7 +4,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 public enum ActivityType {
-	HELLO("com.srcdevbin.buildbot.activity.HelloActivity");
+	HELLO("com.srcdevbin.buildbot.activity.HelloActivity"),
+	GREETING("com.srcdevbin.buildbot.activity.SpeechActivity");
 	
 	private String implementation;
 	
