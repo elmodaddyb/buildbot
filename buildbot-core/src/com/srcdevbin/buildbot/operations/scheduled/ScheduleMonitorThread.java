@@ -1,12 +1,16 @@
-package com.srcdevbin.buildbot.operations;
+package com.srcdevbin.buildbot.operations.scheduled;
 
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.ThreadPoolExecutor;
 
-public class MonitorThread implements Runnable{
+import com.srcdevbin.buildbot.operations.PoolStatus;
+
+public class ScheduleMonitorThread implements Runnable{
 	
-	private PausableThreadPoolExecutor executor;
+	private ScheduledThreadPoolExecutor executor;
 	private boolean run = true;
 
-	public MonitorThread(PausableThreadPoolExecutor executor){
+	public ScheduleMonitorThread(ScheduledThreadPoolExecutor executor){
 		this.executor = executor;
 	}
 	
@@ -30,7 +34,7 @@ public class MonitorThread implements Runnable{
 		return retrieveStatus(executor);
 	}
 	
-	private PoolStatus retrieveStatus(PausableThreadPoolExecutor executor){
+	private PoolStatus retrieveStatus(ScheduledThreadPoolExecutor executor){
 		PoolStatus status = new PoolStatus();
 		status.setPoolSize(executor.getPoolSize());
 		status.setCorePoolSize(executor.getCorePoolSize());
@@ -40,7 +44,6 @@ public class MonitorThread implements Runnable{
 		status.setTaskCount(executor.getTaskCount());
 		status.setShutdown(executor.isShutdown());
 		status.setTerminated(executor.isTerminated());
-		status.setPaused(executor.isPaused());
 		return status;
 	}
 
